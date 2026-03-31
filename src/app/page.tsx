@@ -12,10 +12,10 @@ import { FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
 const projects = [
   { title: "FlowPilot", description: "Uma plataforma que organiza tarefas, acompanha equipes e entrega resultados", url: "https://www.flowpilotapp.com.br", icon: 'icon.svg' },
   { title: "AutoPlacas", description: "Descubra tudo sobre qualquer veículo: histórico completo, leilões e muito mais.", url: "https://autoplaca.com.br", icon: 'autoplaca.svg' },
-  { title: "D2Rep", description: "Uma plataforma transparente para avaliação de jogadores de Dota2.", url: "https://www.d2rep.com", icon: 'd2rep.png' },
-  { title: "D2 Dojo", description: "Uma plataforma que analisa partidas de dota2 e gera relatórios detalhados", url: "https://d2dojo.com", icon: 'd2dojo.svg' },
   { title: "Kick Token Generator", description: "Uma plataforma para gerar tokens de Kick.tv", url: "https://kick-token-generator.vercel.app", icon: 'kicktoken.svg' },
   { title: "TunetrackerPRO", description: "Uma plataforma de widgets interativos youtube, spotify, twitch para streamer de lives", url: "https://www.tunetrackerpro.com", icon: 'tunetracker.svg' },
+  { title: "D2Rep", description: "Uma plataforma transparente para avaliação de jogadores de Dota2.", url: "https://www.d2rep.com", icon: 'd2rep.png' },
+  { title: "D2 Dojo", description: "Uma plataforma que analisa partidas de dota2 e gera relatórios detalhados", url: "https://d2dojo.com", icon: 'd2dojo.svg' },
   { title: "PudgeRunner", description: "Um jogo 2D de plataforma feito com HTML, CSS e JavaScript, com efeitos dos herois do dota2", url: "https://pudge-runner.vercel.app", icon: 'pudgerunner.png' },
   { title: "Brick Breaker", description: "Um jogo 2D de plataforma feito com Phaser 3, com animações e efeitos de partículas", url: "https://brick-breaker-game-delta.vercel.app", icon: 'brickbreaker.png' },
 ];
@@ -28,7 +28,7 @@ const socialLinks = [
 
 export default function Home() {
   return (
-    <div className="relative min-h-screen bg-background py-16 px-4 sm:px-6 lg:px-12 overflow-hidden selection:bg-primary/30 flex justify-center">
+    <main className="relative min-h-screen bg-background py-16 px-4 sm:px-6 lg:px-12 overflow-hidden selection:bg-primary/30 flex justify-center">
       {/* Modern Flickering Grid Background from Magic UI */}
       <FlickeringGrid
         className="absolute inset-0 z-0"
@@ -42,7 +42,7 @@ export default function Home() {
       <div className="z-10 w-full max-w-6xl grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
 
         {/* Left Column */}
-        <div className="lg:col-span-4 flex flex-col gap-3 lg:sticky lg:top-16">
+        <section aria-labelledby="perfil-heading" className="lg:col-span-4 flex flex-col gap-3 lg:sticky lg:top-16">
           {/* Header Section */}
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
@@ -51,19 +51,22 @@ export default function Home() {
             className="flex flex-col items-center gap-5"
           >
             <Avatar className="w-52 h-52 border-[3px] shadow-2xl border-border/80 ring-4 ring-primary/10">
-              <AvatarImage src="./eu.jpg" alt="Avatar" />
+              <AvatarImage src="./eu.jpg" alt="Foto de perfil de Gabriel Carlos Ferreira" />
               <AvatarFallback>GC</AvatarFallback>
             </Avatar>
 
+            <h1 id="perfil-heading" className="sr-only">Gabriel Carlos Ferreira - Desenvolvedor Full-Stack</h1>
             <div className="flex flex-col text-center items-center justify-center lg:text-left space-y-2">
-              <TypingAnimation
-                words={["Gabriel Ferreira", "Desenvolvedor", "Full-Stack"]}
-                blinkCursor={true}
-                pauseDelay={2000}
-                loop
-                className="text-4xl font-extrabold tracking-tight text-foreground"
-                duration={100}
-              />
+              <div aria-hidden="true" className="min-h-[2.5rem] flex items-center justify-center">
+                <TypingAnimation
+                  words={["Gabriel Ferreira", "Desenvolvedor", "Full-Stack"]}
+                  blinkCursor={true}
+                  pauseDelay={2000}
+                  loop
+                  className="text-4xl font-extrabold tracking-tight text-foreground"
+                  duration={100}
+                />
+              </div>
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -95,10 +98,10 @@ export default function Home() {
               </Link>
             ))}
           </motion.div>
-        </div>
-
+        </section>
         {/* Right Column (Projects Section) */}
-        <div className="lg:col-span-8 flex flex-col gap-6">
+        <section aria-labelledby="projetos-heading" className="lg:col-span-8 flex flex-col gap-6">
+          <h2 id="projetos-heading" className="sr-only">Lista de Projetos e Trabalhos Recentes</h2>
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -116,11 +119,10 @@ export default function Home() {
                   >
                     <div className="flex items-center gap-5 sm:gap-6 text-foreground">
                       <div className="flex-shrink-0 w-16 h-16 sm:w-20 sm:h-20 bg-zinc-800/50 rounded-2xl overflow-hidden border border-border/50 shadow-inner flex items-center justify-center">
-                        {/* Placeholder de imagem com o nome do projeto */}
                         <img
-
                           src={project.icon ? `/apps/${project.icon}` : `https://api.dicebear.com/7.x/identicon/svg?seed=${project.title}`}
-                          alt={project.title}
+                          alt={`Logo do projeto ${project.title}`}
+                          loading="lazy"
                           className="w-full h-full object-cover opacity-80"
                         />
                       </div>
@@ -138,9 +140,8 @@ export default function Home() {
               ))}
             </div>
           </motion.div>
-        </div>
-
+        </section>
       </div>
-    </div>
+    </main>
   );
 }
